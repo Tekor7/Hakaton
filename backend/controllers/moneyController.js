@@ -15,7 +15,6 @@ const setMoney = asyncHandler(async (req,res) => {
     con.query(sql, (err,result) => {
         if(err)throw new Error(err.message)
         insertIntoCategory({name: req.body.type,sum: req.body.sum})
-        console.log(result)
         res.send(result)
     })
 })

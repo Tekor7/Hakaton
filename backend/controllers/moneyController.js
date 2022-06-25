@@ -27,8 +27,18 @@ const countNetWorth = asyncHandler(async (req,res) => {
         res.send({networth: result[0].total})
     })
 })
+const getsortedByMoney = asyncHandler(async (req,res) => {
+    const sql = `SELECT * FROM money ORDER BY sum DESC`;
+    con.query(sql,(err,result,fields) => {
+        if(err)throw new Error(err.message)
+        console.log("Sorted results retrieved")
+        console.log(result)
+        res.send(result)
+    })
+})
 module.exports = {
     getMoney,
     setMoney,
-    countNetWorth
+    countNetWorth,
+    getsortedByMoney
 }

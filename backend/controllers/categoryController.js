@@ -2,7 +2,9 @@ const asyncHandler = require('express-async-handler')
 const con = require('../config/db')
 const {getTotal,addSum,addTotal} = require('./totalsController')
 const getCategory = asyncHandler(async (req,res) => {
-    const sql =  `SELECT * FROM ${req.body.name};`
+    let sql =  `SELECT * FROM ${req.body.name}`
+    if(req.body.sorted)sql += " ORDER BY sum DESC"
+    sql += ";";
     con.query(sql, (err,result,fields) => {
         if(err)throw new Error(err.message)
         console.log(result)
